@@ -1,1 +1,1 @@
-web: gunicorn mybike.wsgi --log-file -
+web: gunicorn mybike.wsgi
