@@ -1,0 +1,87 @@
+{% extends 'bikeapp/base.html' %}
+{% load static %}
+{% block nav_bar %}
+    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+      <div class="container">
+        <a class="navbar-brand" href="index.html">Car<span>Book</span></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="oi oi-menu"></span> Menu
+        </button>
+         {% if request.user.is_authenticated%}
+        <div class="collapse navbar-collapse" id="ftco-nav">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+            <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
+            <li class="nav-item"><a href="services.html" class="nav-link">Services</a></li>
+            <li class="nav-item"><a href="pricing.html" class="nav-link">Pricing</a></li>
+            <li class="nav-item active"><a href="car.html" class="nav-link">Cars</a></li>
+            <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
+            <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+             <div class="dropdown show">
+              <a class="btn  dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">My Account </a>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+              <a class="dropdown-item" href="{% url 'myprofile'%}">Profile</a>
+               <a class="dropdown-item" href="{% url 'passwordchange'%}">Change Password</a>
+              <a class="dropdown-item" href="{% url 'logout'%}">Logout</a>
+            </div>
+           </div>
+          </ul>
+           {% else %}
+             <div class="collapse navbar-collapse" id="ftco-nav">
+              <ul class="navbar-nav ml-auto">
+              <li class="nav-item active"><a href="index.html" class="nav-link">Home</a></li>
+              <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
+              <li class="nav-item"><a href="services.html" class="nav-link">Services</a></li>
+              <li class="nav-item"><a href="pricing.html" class="nav-link">Pricing</a></li>
+              <li class="nav-item"><a href="car.html" class="nav-link">Cars</a></li>
+              <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
+              <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+              <li class="nav-item"><a href="{% url 'login'%}" class="nav-link">Login/Register</a></li>
+          </ul>
+          {% endif %}
+        </div>
+      </div>
+    </nav>
+{% endblock nav_bar %}
+{% block change_password %}
+<section class="ftco-section ftco-car-details bg_color">
+     <main class="containers">
+ 
+  <!-- Left Column / Headphones Image -->
+  <div class="left-column">
+    <img data-image="red" class="active" src="{{bike.image.url}}" alt="">
+  </div>
+  
+  <!-- Right Column -->
+  <div class="right-column">
+ 
+    <!-- Product Description -->
+    <div class="product-description">
+      <span>{{bike.bike_name}}</span><br>
+      <span>{{bike.brand}}</span>
+      <h5>Hourly price:-Rs.{{bike.hourly_prices}}</h5>
+      <h5>Daily price:-Rs.{{bike.daily_prices}}</h5>
+      <h5>Weekly price:-Rs.{{bike.weekly_prices}}</h5>
+    
+      <p>{{bike.description}}</p>
+     <form method="POST">
+  {% csrf_token %}
+<div class="form-group col-md-6">
+                      <label for="inputState">Choose Time</label>
+                      <input type="hidden"  class ="bike_id" value="{{bike.id}}" name="">
+                      <select name="get_val" id="inputcharge" class="form-control">
+                        <option selected>Choose...</option>
+                        <option value="h">Hourly</option>
+                        <option value="d">Daily</option>
+                        <option value="w">Weekly</option>
+                      </select>
+                   <a href="{% url 'cart' pk=bike.pk%}"> <button>Add Cart</button></a>
+</div>
+</form>
+    </div>
+ 
+    <!-- Product Configuration -->
+ 
+</main>
+</section>
+{% endblock change_password %}

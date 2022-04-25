@@ -1,0 +1,98 @@
+{% extends 'bikeapp/base.html' %}
+{% load static %}
+{% block change_password %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Shopping Cart</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"">
+</head>
+<body>
+	<main class="page">
+	 	<section class="shopping-cart dark">
+	 		<div class="container">
+		        <div class="block-heading">
+		          <h2>Bike Cart</h2>
+		        </div>
+		        <div class="content">
+	 				<div class="row">
+	 					<div class="col-md-12 col-lg-8">
+	 						 <form method="POST" class="cart style2" enctype="multipart/form-data">
+				              {%csrf_token%}
+				              {% if messages %}
+				              <div class="alert alert-success">
+				                  {% for message in messages %}
+				                      <a>{{ message }}</a>
+				                  {% endfor %}
+				                </div>
+				                {% endif %}
+	 						{% for i, j in x%}
+	 						<div class="items">
+				 				<div class="product">
+				 					<div class="row">
+					 					<div class="col-md-3">
+					 						<img class="img-fluid mx-auto d-block image"  src="{{ i.image.url }}">
+					 					</div>
+					 					<div class="col-md-8">
+					 						<div class="info">
+						 						<div class="row">
+							 						<div class="col-md-3 product-name textsize">
+							 							<div class="product-name">
+								 							<a href="#">{{i.bike_name}}</a>
+								 							<div class="product-info">
+									 							<div>Brand: <span class="value">{{i.brand}}</span></div>
+									 							<div>Capacity: <span class="value">{{i.capacity}}</span></div>
+									 						</div>
+									 					</div>
+							 						</div>
+							 						<div class="col-md-2 textsize">
+							 							<label for="quantity">StartDate Time</label>
+							 							<div value="5 inch">{{j.start_date}} {{j.start_time}}</div>
+							 						</div>
+							 						<div class="col-md-2 textsize">
+							 							<label for="quantity" class="textsize">EndDate Time</label>
+							 							<div value="5 inch">{{j.end_date}} {{j.end_time}}</div>
+							 						</div>
+							 						<div class="col-md-2 textsize">
+							 							<label for="quantity" class="textsize">Duration</label>
+							 							<div value="5 inch">hours</div>
+							 						</div>
+							 						<div class="col-md-2 textsize">
+							 							<label for="quantity" class="textsize">Price</label>
+							 							<div value="5 inch">price</div>
+							 						</div>
+							 						<div class="col-md-2 price textsize">
+							 							<a href="{% url 'deletecart' j.id%}"><button class="btn btn-danger">Remove</button></a>
+							 						</div>
+							 					</form>
+							 					</div>
+							 				</div>
+					 					</div>
+					 				</div>
+				 				</div>
+				 			</div>
+				 			{% endfor %}
+			 			</div>
+			 			<div class="col-md-12 col-lg-4">
+			 				<div class="summary">
+			 					<h3>Summary</h3>
+			 					<div class="summary-item"><span class="text">Subtotal</span><span class="price">$360</span></div>
+			 					<div class="summary-item"><span class="text">Discount</span><span class="price">$0</span></div>
+			 					<div class="summary-item"><span class="text">Shipping</span><span class="price">$0</span></div>
+			 					<div class="summary-item"><span class="text">Total</span><span class="price">$360</span></div>
+			 					<button type="button" class="btn btn-primary btn-lg btn-block">Checkout</button>
+				 			</div>
+			 			</div>
+		 			</div> 
+		 		</div>
+	 		</div>
+		</section>
+	</main>
+</body>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+</html>
+{% endblock change_password%}

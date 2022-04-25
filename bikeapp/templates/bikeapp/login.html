@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+{% load static%}
+<html lang="en">
+  <head>
+    <title>Carbook - Free Bootstrap 4 Template by Colorlib</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="{% static 'app/css/open-iconic-bootstrap.min.css'%}">
+    <link rel="stylesheet" href="{% static 'app/css/animate.css'%}">
+    
+    <link rel="stylesheet" href="{% static 'app/css/owl.carousel.min.css'%}">
+    <link rel="stylesheet" href="{% static 'app/css/owl.theme.default.min.css'%}">
+    <link rel="stylesheet" href="{% static 'app/css/magnific-popup.css'%}">
+
+    <link rel="stylesheet" href="{% static 'app/css/aos.css'%}">
+
+    <link rel="stylesheet" href="{% static 'app/css/ionicons.min.css'%}">
+
+    <link rel="stylesheet" href="{% static 'app/css/bootstrap-datepicker.css'%}">
+    <link rel="stylesheet" href="{% static 'app/css/jquery.timepicker.css'%}">
+
+    
+    <link rel="stylesheet" href="{% static 'app/css/flaticon.css'%}">
+    <link rel="stylesheet" href="{% static 'app/css/icomoon.css'%}">
+    <link rel="stylesheet" href="{% static 'app/css/style.css'%}">
+     <!-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> -->
+    <link rel="stylesheet" href="{% static 'app/css/login.css'%}">
+  </head>
+  <body>
+
+<!------ Include the above in your HEAD tag -------- -->
+
+<section class="login-block">
+    <div class="container_login">
+	<div class="row">
+		<div class="col-md-4 login-sec">
+		    <h2 class="text-center">Login Now</h2>
+<form class="login-form" method="post">
+     {% csrf_token %}
+      {% for f in form%}
+        {{f.label_tag}}{{f}}<small class="text-danger">{{f.errors|striptags}}</small>
+      {% endfor %}
+      <br>
+      {% if form.non_field_errors%}
+        {% for error in form.non_field_errors %} 
+        <p class="alert alert-danger">{{error}}</p>
+        {% endfor %}
+      {% endif %}
+      <input type="submit" value="submit" class="btn btn-primary">
+   <!-- </div> -->
+   <a href="{% url 'password_reset'%}">Forgeot Password??</a>
+</form>
+
+<div class="copy-text">Created with <i class="fa fa-heart"></i> by Grafreez</div>
+		</div>
+		<div class="col-md-8 banner-sec">
+            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner" role="listbox">
+    <div class="carousel-item active">
+      <img class="d-block img-fluid" src="https://static.pexels.com/photos/33972/pexels-photo.jpg" alt="First slide">
+      <div class="carousel-caption d-none d-md-block">
+        <div class="banner-text">
+            <h2>This is Heaven</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation</p>
+         <a href="{% url 'register'%}"><button type="button" class="btn btn-primary btn-lg">Register Now</button></a>
+
+        </div>	
+  </div>
+   
+  </div>
+  </div>	   
+		    
+		</div>
+	</div>
+</div>
+</section>

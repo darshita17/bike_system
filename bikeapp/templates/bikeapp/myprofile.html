@@ -1,0 +1,12 @@
+{% extends 'bikeapp/base.html' %}
+{% load crispy_forms_tags %}
+{% block change_password %}
+<div class="card_body" style="width: 18rem;">
+  <div class="card-body">
+    <h2 class="account-heading">Name:{{ user.username }}</h2>
+    <h2 class="account-heading">Email:-{{ user.email }}</h2>
+    <img class="account-img" src="{{ user.profile.image.url }}">
+  </div>
+</div>
+{% endblock change_password %}
+

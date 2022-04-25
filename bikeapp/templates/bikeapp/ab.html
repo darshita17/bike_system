@@ -1,0 +1,14 @@
+<form method="POST">
+  {% csrf_token %}
+<div class="form-group col-md-6">
+                      <label for="inputState">Choose Time</label>
+                      <input type="hidden"  class ="bike_id" value="{{bike.id}}" name="">
+                      <select name="get_val" id="inputcharge" class="form-control">
+                        <option selected>Choose...</option>
+                        <option value="h">Hourly</option>
+                        <option value="d">Daily</option>
+                        <option value="w">Weekly</option>
+                      </select>
+<input type="submit">Submit
+</div>
+</form>

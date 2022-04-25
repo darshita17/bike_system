@@ -1,0 +1,129 @@
+{% extends 'bikeapp/base.html' %}
+{% load static %}
+{% block nav_bar %}
+    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+      <div class="container">
+        <a class="navbar-brand" href="index.html">Car<span>Book</span></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="oi oi-menu"></span> Menu
+        </button>
+         {% if request.user.is_authenticated%}
+        <div class="collapse navbar-collapse" id="ftco-nav">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+            <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
+            <li class="nav-item"><a href="services.html" class="nav-link">Services</a></li>
+            <li class="nav-item"><a href="pricing.html" class="nav-link">Pricing</a></li>
+            <li class="nav-item active"><a href="car.html" class="nav-link">Cars</a></li>
+            <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
+            <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+             <div class="dropdown show">
+              <a class="btn  dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">My Account </a>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+              <a class="dropdown-item" href="{% url 'myprofile'%}">Profile</a>
+               <a class="dropdown-item" href="{% url 'passwordchange'%}">Change Password</a>
+              <a class="dropdown-item" href="{% url 'logout'%}">Logout</a>
+            </div>
+           </div>
+          </ul>
+           {% else %}
+             <div class="collapse navbar-collapse" id="ftco-nav">
+              <ul class="navbar-nav ml-auto">
+              <li class="nav-item active"><a href="index.html" class="nav-link">Home</a></li>
+              <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
+              <li class="nav-item"><a href="services.html" class="nav-link">Services</a></li>
+              <li class="nav-item"><a href="pricing.html" class="nav-link">Pricing</a></li>
+              <li class="nav-item"><a href="car.html" class="nav-link">Cars</a></li>
+              <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
+              <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+              <li class="nav-item"><a href="{% url 'login'%}" class="nav-link">Login/Register</a></li>
+          </ul>
+          {% endif %}
+        </div>
+      </div>
+    </nav>
+{% endblock nav_bar %}
+{% block change_password %}
+<section class="ftco-section bg_color">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-6 text-center mb-5">
+        <h2 class="heading-section">Book Bike</h2> </div>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-md-12">
+        <div class="wrapper">
+          <div class="row no-gutters">
+            <div class="col-lg-6">
+              <div class="contact-wrap w-100 p-md-5 p-4">
+                <h3>Your Details</h3>
+                <form method="POST" action="" id="a" data-provider-url="{% url 'bookbike' pk=bike.pk %}">
+                  {% csrf_token%}
+                  <div class="form-row">
+                    <div class="form-group col-md-6">
+                      <label for="inputAddress">Bike Name</label>
+                      <input type="text" disabled class="form-control" id="name" value="{{bike.bike_name}}" for="bike_name" ></div>
+                    <div class="form-group col-md-6">
+                      <label for="inputAddress">Name</label>
+                      <input type="text" class="form-control" id="name" value="{{user.username}}"> </div>
+                    <div class="form-group col-md-6">
+                      <label for="inputEmail4">Email</label>
+                      <input type="email" class="form-control" id="email" value="{{user.email}}"> </div>
+                    <div class="form-group col-md-6">
+                      <label for="inputPassword4">Start Date</label>
+                       <input type="text" class="form-control" id="book_pick_date" value="{{pickupdate}}" name="pickupdate" required>
+                     </div>
+                    <div class="form-group col-md-6">
+                      <label for="inputPassword4">End Date</label>
+                     <input type="text" class="form-control" id="book_pick_date" value="{{dropoffdate}}" name="pickupdate" required>
+                   </div>
+                    <div class="form-group col-md-6">
+                      <label for="inputState">Choose Time</label>
+                      <input type="hidden"  class ="bike_id" value="{{bike.id}}" name="">
+                      <select name="get_val" id="inputcharge" class="form-control">
+                        <option selected>Choose...</option>
+                        <option value="h">Hourly</option>
+                        <option value="d">Daily</option>
+                        <option value="w">Weekly</option>
+                      </select>
+                    </div>
+                    <div class="form-group col-md-6">
+                      <label for="Price">Price</label>
+                      <input type="text" class="form-control" id="inputAddress2"disabled value="{{hourly_charge}}"></div>
+                    <div class="form-row">
+                      <div class="form-group col-md-6">
+                        <label for="inputCity">State</label>
+                        <input type="text" class="form-control" for="state" name="state" id="state"> </div>
+                        <!-- </select> -->
+                      <div class="form-group col-md-6">
+                        <label for="inputState">City</label>
+                        <input type="text" class="form-control" for="city" name="city" id="state">
+                      </div>
+                         <div class="form-group col-md-6">
+                        <label for="inputState">Area</label>
+                        <input type="text" class="form-control" for="area" name="area" id="state">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="gridCheck">
+                        <label class="form-check-label" for="gridCheck"> Check me out </label>
+                      </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Book Bike</button>
+                </form>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6 d-flex align-items-stretch">
+             <!--    <div class="info-wrap w-100 p-5 img bg_image">{{bike.image.url}}</div> -->
+              <img  class="img rounded d-flex align-items-end" src="{{ bike.image.url }}" />
+              </div>
+          </div>
+        </div>
+
+      </div>
+      
+    </div>
+</section>
+{% endblock change_password%}
